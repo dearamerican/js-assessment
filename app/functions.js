@@ -63,27 +63,6 @@ exports.functionsAnswers = {
       return fn.apply(null, allArgs);        
     };
   },
-
-
-    // function applyArguments(fn, arguments) {
-    //   return fn.apply(null, arguments);
-    // }
-
-    // function getArgumentAccumulator(accumulatedArguments, expectedArgumentsCount) {
-    //   return function (currentArgument) {
-    //     accumulatedArguments.push(currentArgument);
-
-    //     var allArgumentsProvided = accumulatedArguments.length === expectedArgumentsCount;
-
-    //     if (allArgumentsProvided) {
-    //       return applyArguments(fn, accumulatedArguments);
-    //     } else {
-    //       return getArgumentAccumulator(accumulatedArguments, expectedArgumentsCount);
-    //     }
-    //   };
-    // }
-
-    // return getArgumentAccumulator([], fn.length);
   
   curryIt : function(fn) {
     
