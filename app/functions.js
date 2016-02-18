@@ -55,24 +55,54 @@ exports.functionsAnswers = {
     return fn.apply(null, args);
   },
 
-// function schonfinkelize(fn) {
-//      var stored_args = Array.prototype.slice.call(arguments, 1);
-//      return function () {
-//         var new_args = slice.call(arguments),
-//               args = stored_args.concat(new_args);
-//         return fn.apply(null, args);
-//      };
-// }
   partialUsingArguments : function(fn) {
     var storedArgs = Array.prototype.slice.call(arguments, 1, arguments.length);
     return function() {
       var newArgs = Array.prototype.slice.call(arguments);
-      var hellaArgs = storedArgs.concat(newArgs);
-      return fn.apply(null, hellaArgs);        
+      var allArgs = storedArgs.concat(newArgs);
+      return fn.apply(null, allArgs);        
     };
   },
 
-  curryIt : function(fn) {
 
+    // function applyArguments(fn, arguments) {
+    //   return fn.apply(null, arguments);
+    // }
+
+    // function getArgumentAccumulator(accumulatedArguments, expectedArgumentsCount) {
+    //   return function (currentArgument) {
+    //     accumulatedArguments.push(currentArgument);
+
+    //     var allArgumentsProvided = accumulatedArguments.length === expectedArgumentsCount;
+
+    //     if (allArgumentsProvided) {
+    //       return applyArguments(fn, accumulatedArguments);
+    //     } else {
+    //       return getArgumentAccumulator(accumulatedArguments, expectedArgumentsCount);
+    //     }
+    //   };
+    // }
+
+    // return getArgumentAccumulator([], fn.length);
+  
+  curryIt : function(fn) {
+    
+    function applyArguments(fn, arguments) {
+      return fn.apply(null, arguments);
+    }
+
+    function getArgumentAccumulator(accumArgs, numExpectedArgs) {
+      return function(currentArg) {
+        accumArgs.push(currentArg);
+        var allArgsGiven = accumArgs.length === numExpectedArgs;
+        if(allArgsGiven) {
+          return applyArguments(fn, accumArgs);
+        } else {
+          return getArgumentAccumulator(accumArgs, numExpectedArgs);
+        }
+      };
+    }
+
+    return getArgumentAccumulator([], fn.length);
   }
-};
+}
