@@ -49,10 +49,27 @@ exports.recursionAnswers = {
 
   permute: function(arr) {
 
-    var recurse = function() {
+    var permArr = [];
+    var temp = [];
+    var recurse = function(input) {
+      var i;
+      var len;
+      var char;
+      for(i = 0; i < input.length; i++) {
+        char = input.splice(i, 1)[0];
+        temp.push(char);
 
+        if(input.length === 0) {
+          permArr.push(temp.slice());
+        } 
+        recurse(input)
+        input.splice(i, 0, char);
+        temp.pop();
+      }
     };
 
+    recurse(arr);
+    return permArr;
   },
 
   fibonacci: function(n) {
