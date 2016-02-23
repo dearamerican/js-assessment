@@ -80,6 +80,21 @@ exports.recursionAnswers = {
   },
 
   validParentheses: function(n) {
-
+    var results = [];
+    
+    var recurse = function(open, close, str) {
+        if(open === 0 && close === 0) {
+            results.push(str);
+        }
+        if(open > 0) {
+            recurse(open - 1, close + 1, str + '(');
+        }
+        if(close > 0) {
+            recurse(open, close - 1, str + ')');
+        }
+        return results;
+    };
+    recurse(n, 0, '');
+    return results;
   }
 };

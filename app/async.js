@@ -6,7 +6,7 @@ exports.asyncAnswers = {
       window.setTimeout(
         function() {
           resolve(value);
-        }, Math.random()*2000 + 1000);
+        }, Math.random()*2 + 1000);
     });
 
   },
